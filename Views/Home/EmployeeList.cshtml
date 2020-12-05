@@ -1,0 +1,81 @@
+﻿@model MvcProj.Models.DTO.EmplyeeListDto
+
+@{
+    ViewBag.Title = "Employee List";
+}
+
+
+
+<h2>Employee List</h2>
+
+<p>
+    @Html.ActionLink("Create New Employee",
+                     "AddEmployee", "Home"
+                    )
+</p>
+@using (Html.BeginForm("Index", "Home"))
+{
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.filter.EmployeeName)</td>
+            <td>@Html.TextBoxFor(model => model.filter.EmployeeName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.filter.DepartmentName)</td>
+            <td>@Html.TextBoxFor(model => model.filter.DepartmentName)</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+
+                <input type="submit" value="Search" />
+                
+            </td>
+        </tr>
+    </table>
+}
+    @if (Model.employeeList != null && Model.employeeList.Count > 0)
+    {
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.employeeList[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employeeList[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employeeList[0].DateOfJoining)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employeeList[0].AnnualSalary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employeeList[0].Department)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.employeeList)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfJoining)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AnnualSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Name)
+            </td>
+        </tr>
+            }
+        </table>
+    }
+
